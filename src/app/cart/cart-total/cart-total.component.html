@@ -1,0 +1,44 @@
+<ng-container *ngIf="cartCount$ | async as cartCount">
+  <div class="card border-secondary" *ngIf="cartCount > 0">
+    <div class="card-header text-secondary fw-bold">Cart Total</div>
+
+    <div class="card-body">
+      <div class="row" *ngIf="subTotal$ | async as subTotal">
+        <div class="col-md-5">Subtotal:</div>
+        <div class="col-md-4 text-end">{{ subTotal | currency }}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">Delivery:</div>
+        <ng-container *ngIf="deliveryFee$ | async as deliveryFee">
+          <div class="col-md-4 text-end" *ngIf="deliveryFee">
+            {{ deliveryFee | currency }}
+          </div>
+          <div
+            class="col-md-4"
+            style="text-align: right; color: red"
+            *ngIf="!deliveryFee"
+          >
+            Free
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">Estimated Tax:</div>
+        <ng-container *ngIf="tax$ | async as tax">
+          <div class="col-md-4 text-end">{{ tax | currency }}</div>
+        </ng-container>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5"><b>Total:</b></div>
+        <div
+          class="col-md-4 text-end"
+          *ngIf="totalPrice$ | async as totalPrice"
+        >
+          <b>{{ totalPrice | currency }}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
