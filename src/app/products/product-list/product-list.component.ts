@@ -13,20 +13,13 @@ import { EMPTY, catchError } from 'rxjs';
 })
 export class ProductListComponent {
   pageTitle = 'Products';
-  errorMessage = '';
 
   private productService = inject(ProductService);
+  errorMessage = this.productService.productsError;
 
-  // Products
-  readonly products$ = this.productService.products$.pipe(
-    catchError((err) => {
-      this.errorMessage = err;
-      return EMPTY;
-    })
-  );
+  products = this.productService.products;
 
-  // Selected product id to highlight the entry
-  readonly selectedProductId$ = this.productService.productSelected$;
+  selectedProductId = this.productService.selectedProduct;
 
   onSelected(productId: number): void {
     this.productService.productSelected(productId);
