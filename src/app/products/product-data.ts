@@ -1,7 +1,6 @@
 import { Product } from './product';
 
 export class ProductData {
-
   static products: Product[] = [
     {
       id: 1,
@@ -10,7 +9,8 @@ export class ProductData {
       description: 'Leaf rake with 48-inch wooden handle',
       price: 19.95,
       quantityInStock: 15,
-      hasReviews: true
+      hasReviews: true,
+      starRating: 4.5, // Example starRating
     },
     {
       id: 2,
@@ -19,7 +19,8 @@ export class ProductData {
       description: '15 gallon capacity rolling garden cart',
       price: 32.99,
       quantityInStock: 2,
-      hasReviews: true
+      hasReviews: true,
+      starRating: 4.2, // Example starRating
     },
     {
       id: 5,
@@ -28,7 +29,8 @@ export class ProductData {
       description: 'Curved claw steel hammer',
       price: 8.9,
       quantityInStock: 8,
-      hasReviews: true
+      hasReviews: true,
+      starRating: 4.0, // Example starRating
     },
     {
       id: 8,
@@ -37,7 +39,8 @@ export class ProductData {
       description: '15-inch steel blade hand saw',
       price: 11.55,
       quantityInStock: 6,
-      hasReviews: false
+      hasReviews: false,
+      starRating: 3.8, // Example starRating
     },
     {
       id: 10,
@@ -46,7 +49,8 @@ export class ProductData {
       description: 'Standard two-button video game controller',
       price: 35.95,
       quantityInStock: 12,
-      hasReviews: true
-    }
+      hasReviews: true,
+      starRating: 4.7, // Example starRating
+    },
   ];
 }

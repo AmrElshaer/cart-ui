@@ -4,7 +4,10 @@
   </div>
   <div class="card-body">
     <div class="container-fluid">
-      <h2 class="card-title">Binder</h2>
+      <h2 class="card-title">
+        <span [style.color]="isZeroCounter() ? 'red' : 'green'">Test</span>
+      </h2>
+      <button (click)="increaseCounter()">Increase</button>
     </div>
   </div>
 </div>

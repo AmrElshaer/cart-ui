@@ -1,23 +1,21 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
-  BehaviorSubject,
   Observable,
   catchError,
-  combineLatest,
   filter,
   map,
   of,
-  shareReplay,
   switchMap,
   tap,
   throwError,
 } from 'rxjs';
-import { Product, Result } from './product';
-import { HttpErrorService } from '../utilities/http-error.service';
-import { ReviewService } from '../reviews/review.service';
 import { Review } from '../reviews/review';
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { ReviewService } from '../reviews/review.service';
+import { HttpErrorService } from '../utilities/http-error.service';
+import { Product, Result } from './product';
+import { CreateProductRequest } from './product-create/product-create-request';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,10 +28,9 @@ export class ProductService {
 
   selectedProduct = signal<number | undefined>(undefined);
 
-  private products$ = this.http.get<Product[]>(this.productsUrl).pipe(
+  products$ = this.http.get<Product[]>(this.productsUrl).pipe(
     map((p) => ({ data: p } as Result<Product[]>)),
     tap((p) => console.log(JSON.stringify(p))),
-    shareReplay(1),
     catchError((err) =>
       of({
         data: [],
@@ -99,5 +96,11 @@ export class ProductService {
     const formattedMessage = this.errorService.formatError(err);
     return throwError(() => formattedMessage);
     // throw formattedMessage;
+  }
+  createProduct(product: CreateProductRequest): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product).pipe(
+      tap((data) => console.log('createProduct: ' + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 }

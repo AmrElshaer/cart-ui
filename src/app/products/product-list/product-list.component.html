@@ -4,6 +4,15 @@
       <div class="card-header">
         {{ pageTitle }}
       </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <ng-container *ngIf="products$ | async as products">
+            <li class="list-group-item" *ngFor="let product of products.data">
+              {{ product.productName }}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
 
       <div class="card-body" *ngIf="products() as products">
         <div class="list-group">

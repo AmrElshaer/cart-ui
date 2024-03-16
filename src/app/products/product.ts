@@ -10,6 +10,8 @@ export interface Product {
   quantityInStock?: number;
   hasReviews?: boolean;
   reviews?: Review[];
+  tags?: string[];
+  starRating: number;
 }
 export interface Result<T> {
   data: T | undefined;
